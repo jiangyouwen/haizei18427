@@ -1,0 +1,12 @@
+#include<stdio.h>
+int main(){
+    int sum3 = 0,sum5 = 0 ,sum15 = 0;
+    for(int i = 3; i <= 999; i += 3)
+    {sum3+=i;}
+    for(int j = 5; j <= 995; j += 5)
+    {sum5+=j;}
+    for(int k = 15; k <= 990; k += 15)
+    {sum15 +=k;}
+    printf("%d\n",sum3+sum5-sum15);
+    return 0;
+}
