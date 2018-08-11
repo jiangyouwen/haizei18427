@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include <inttypes.h>
+int64_t main(){
+    int64_t a = 0,b = 1,temp,ans = 0;
+    while(a + b <= 4000000){
+        temp = a + b;
+        a = b;
+        b = temp;
+        if(b&1)continue;
+        ans += b;
+    }
+
+   printf("%"PRId64"\n",ans);
+    return 0;
+}
