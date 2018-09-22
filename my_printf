@@ -1,0 +1,66 @@
+/*************************************************************************
+	> File Name: my_printf.cpp
+	> Author:jiangyouwen 
+	> Mail: 931216308@qq.com
+	> Created Time: 2018年09月23日 星期日 00时33分56秒
+ ************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <inttypes.h>
+
+int64_t my_printf(const char *frm, ...) {
+        int64_t cnt = 0;
+        va_list arg;
+        va_start(arg, frm);
+    for (int64_t i = 0, cnt = 0; frm[i]; i++, cnt++) {
+        switch (frm[i]) {
+            case '%' : {
+                i++;
+                switch(frm[i]) {
+                    case 'd' : {
+                        int64_t temp = va_arg(arg, int), x = 0;
+                        if (temp < 0) {
+                            putchar ('-');
+                            temp = -temp;
+                        }
+                        while (temp) {
+                            x = x * 10 + temp % 10;
+                            temp /= 10;                                             
+                        }
+                        while (x) {
+                            putchar(x % 10 + '0');
+                            x /= 10;                        
+                        } 
+                                            
+                    } break;
+                            default : 
+                            fprintf(stderr, "error : unknow %%%c\n", frm[i]); 
+                            exit(1);
+                                    
+                }
+                            
+            } break;
+            default:
+            putchar(frm[i]);
+                    
+        }
+            
+    }
+        return cnt;
+
+}
+
+int main() {
+        int n = 123;
+        my_printf("hello world\n");
+        my_printf("n = %d\n", n);
+        my_printf("n = %d\n", 12000);
+        my_printf("n = %d\n", -567);
+        my_printf("n = %d\n", INT32_MIN);
+        my_printf("n = %d\n", INT32_MAX);
+        return 0;
+
+}
+
